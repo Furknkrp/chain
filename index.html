@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlockChain Game</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Başlık ve Yönetici Butonu -->
+    <div class="header">
+      <button id="admin-button" class="admin-button">
+        <img src="/pictures/chain_logo.jpg" alt="Çankaya Üniversitesi" class="admin-logo">
+      </button>
+      <h1>BlockChain Game</h1>
+    </div>
+
+    <!-- Hoş Geldin Ekranı -->
+    <div id="welcome-section">
+      <button id="register-welcome-button" class="welcome-button">Kayıt Ol</button>
+      <button id="login-welcome-button" class="welcome-button">Giriş Yap</button>
+    </div>
+
+    <!-- Kayıt Bölümü -->
+    <div id="register-section" style="display: none;">
+      <div id="register-form" style="display: none;">
+        <h2>Kayıt Ol</h2>
+        <input type="text" id="player-username" placeholder="Kullanıcı adınızı girin" required>
+        <input type="password" id="player-password" placeholder="Şifrenizi girin" required>
+        <button id="register-submit-button">Kayıt Ol</button>
+        <button id="register-back-button" class="back-button">Geri Dön</button>
+      </div>
+      <div id="login-form" style="display: none;">
+        <h2>Giriş Yap</h2>
+        <input type="text" id="login-username" placeholder="Kullanıcı adı">
+        <input type="password" id="login-password" placeholder="Şifre">
+        <button id="login-submit-button">Giriş Yap</button>
+        <button id="login-back-button" class="back-button">Geri Dön</button>
+      </div>
+    </div>
+
+    <!-- Engellenen Oyuncular (Yönetici) -->
+    <div id="blocked-players-section" style="display: none;">
+      <h2>Engellenen Oyuncular</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Eylem</th>
+          </tr>
+        </thead>
+        <tbody id="blocked-players-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Harita -->
+    <img src="/pictures/harita.png" alt="Map" class="map-img" style="display: none;">
+
+    <!-- QR Kod Tarama Bölümü -->
+    <div id="scan-section" style="display: none;">
+      <h2>QR Kodu Tara</h2>
+      <video id="video" width="300" height="200"></video>
+      <canvas id="canvas" width="300" height="200"></canvas>
+      <button id="start-scanner-button">Kamerayı Başlat</button>
+      <p>veya</p>
+      <input type="text" id="manual-qr" placeholder="QR kodunu manuel gir">
+      <button id="submit-manual-qr-button">Gönder</button>
+    </div>
+
+    <!-- Sıralama Tablosu -->
+    <div id="leaderboard" style="display: none;">
+      <h2>Sıralama Tablosu</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Kullanıcı Adı</th>
+            <th>Tarama Sayısı</th>
+            <th>Son QR Kodu</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmnOLgZuBhZrrTHrVbdvXmK0oBSlOam9A",
+      authDomain: "chain-baed8.firebaseapp.com",
+      projectId: "chain-baed8",
+      storageBucket: "chain-baed8.firebasestorage.app",
+      messagingSenderId: "1086759241641",
+      appId: "1:1086759241641:web:e15923e4cc119a052166b8",
+      measurementId: "G-QTG8LDV9E3"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+  </script>
+
+  <!-- script.js dosyasını modül olarak yükle -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
